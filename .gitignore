@@ -1,0 +1,11 @@
+# Output
+*.out
+
+# PDF
+*.pdf
+
+# System files
+.DS_Store
+
+# IDE
+.vscode/
