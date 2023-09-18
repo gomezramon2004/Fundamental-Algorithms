@@ -3,33 +3,26 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <ctime>
+#include <algorithm>
 #include <stdexcept> 
 
-std::vector<std::vector<int>> parse(std::string fileName) {
-    std::vector<std::vector<int>> parsedVec;
-    std::ifstream inputFile;
-    int sizeVec, num;
-    inputFile.open(fileName); //RAII is responsible for destruct the file-handling object out of scope. It will handle file closing automatically
+std::vector<Info> parse(std::string fileName) {
+    std::vector<Info> parsedVec;
+    std::ifstream inputFile;  //RAII is responsible for destruct the file-handling object out of scope. It will handle file closing automatically
+    std::string line;
+    inputFile.open(fileName);
 
     if (!inputFile.is_open()) {
         throw std::runtime_error("Error - Unable to open the file.");
     }
 
-    while (inputFile >> sizeVec) {
-        if (sizeVec <= 0) {
-            throw std::runtime_error("Error - Vector size must be a positive integer.");
-        }
-
-        std::vector<int> tempVec; 
-        tempVec.reserve(sizeVec); // To reduced reallocation vector size
-
-        for (int i = 0; i < sizeVec; ++i) {
-            inputFile >> num;
-            tempVec.push_back(num);
-        }
-        
-        parsedVec.push_back(tempVec);
+    while (std::getline(inputFile, line)) {
+        const char *dateTime = line.substr(0, 16).c_str();
+        struct tm timeStruct;
+        strptime(dateTime,"%d/%m/%Y %H:%M", &timeStruct);
+        std::time_t time = mktime(&timeStruct);
+        parsedVec.push_back({time, timeStruct, line[17], line.substr(19, 24)});
     }
-
     return parsedVec;
 }
