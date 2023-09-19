@@ -10,13 +10,12 @@ int main() {
 
     for (auto &&i : bitacora) {
         std::cout << "dia: " << i.dateTime.tm_mday << " ";
-        std::cout << "mes: " << i.dateTime.tm_mon + 1 << " ";
-        std::cout << "año: " << i.dateTime.tm_year + 1900 << " ";
+        std::cout << "mes: " << i.dateTime.tm_mon << " ";
+        std::cout << "año: " << i.dateTime.tm_year << " ";
         std::cout << "hora: " << i.dateTime.tm_hour << " ";
         std::cout << "minutos: " << i.dateTime.tm_min << " ";
         std::cout << "entrada: " << i.enterPoint << " ";
         std::cout << "ubi: " << i.ubi << "\n";
-
     }
 
     return 0;
