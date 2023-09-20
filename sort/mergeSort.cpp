@@ -1,50 +1,48 @@
 #include "mergeSort.hpp"
 #include <iostream>
 
-int merge(std::vector<int>& vec, int left, int mid, int right, int& count) {
-    int n1 = mid - left + 1, n2 = right - mid;
-    std::vector<int> leftvec(n1), rightvec(n2);
-
-    for (int i = 0; i < n1; i++) {
-        leftvec[i] = vec[left + i];
+bool compareInfoByIndUbi(const Info& info1, const Info& info2) {
+    if (info1.ubi == info2.ubi) {
+        return info1.timeValue < info2.timeValue;
     }
-    for (int i = 0; i < n2; i++) {
-        rightvec[i] = vec[mid + 1 + i];
-    }
+    return info1.ubi < info2.ubi;
+}
 
-    int i = 0, j = 0, k = left;
+void merge(std::vector<Info>& vec, int left, int mid, int right) {
+    int n1 = mid - left + 1, n2 = right - mid, i = 0, j = 0, k = left;
+
+    std::vector<Info> leftVec(vec.begin() + left, vec.begin() + left + n1);
+    std::vector<Info> rightVec(vec.begin() + mid + 1, vec.begin() + mid + 1 + n2);
 
     while (i < n1 && j < n2) {
-        count++;
-        if (leftvec[i] <= rightvec[j]) {
-            vec[k] = leftvec[i];
+        if (compareInfoByIndUbi(leftVec[i], rightVec[j])) {
+            vec[k] = leftVec[i];
             i++;
         } else {
-            vec[k] = rightvec[j];
+            vec[k] = rightVec[j];
             j++;
         }
         k++;
     }
 
     while (i < n1) {
-        vec[k] = leftvec[i];
-        i++; k++;
+        vec[k] = leftVec[i];
+        i++;
+        k++;
     }
 
     while (j < n2) {
-        vec[k] = rightvec[j];
-        j++; k++;
+        vec[k] = rightVec[j];
+        j++;
+        k++;
     }
-
-    return count;
 }
 
-int ordenaMerge(std::vector<int>& vec, int left, int right, int& count) {
+void mergeSort(std::vector<Info>& vec, int left, int right) {
     if (left < right) {
         int mid = left + (right - left) / 2;
-        ordenaMerge(vec, left, mid, count);
-        ordenaMerge(vec, mid + 1, right, count);
-        return merge(vec, left, mid, right, count);
+        mergeSort(vec, left, mid);
+        mergeSort(vec, mid + 1, right);
+        return merge(vec, left, mid, right);
     }
-    return 0;
 }

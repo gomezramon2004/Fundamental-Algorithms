@@ -7,6 +7,7 @@
 
 int main() {
     std::vector<Info> bitacora = parse("bitacora.txt");
+    mergeSort(bitacora, 0, bitacora.size() - 1);
 
     for (auto &&i : bitacora) {
         std::cout << "dia: " << i.dateTime.tm_mday << " ";
@@ -16,7 +17,6 @@ int main() {
         std::cout << "minutos: " << i.dateTime.tm_min << " ";
         std::cout << "entrada: " << i.enterPoint << " ";
         std::cout << "ubi: " << i.ubi << "\n";
-
     }
 
     return 0;

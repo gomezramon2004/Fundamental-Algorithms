@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include "../parse/parse.hpp"
 
-int merge(std::vector<int>& vec, int left, int mid, int right, int& count);
-int ordenaMerge(std::vector<int>& vec, int left, int right, int& count);
+bool compareInfoByIndUbi(const Info& info1, const Info& info2);
+void merge(std::vector<Info>& vec, int left, int mid, int right);
+void mergeSort(std::vector<Info>& vec, int left, int right);
