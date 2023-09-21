@@ -43,6 +43,6 @@ void mergeSort(std::vector<Info>& vec, int left, int right) {
         int mid = left + (right - left) / 2;
         mergeSort(vec, left, mid);
         mergeSort(vec, mid + 1, right);
-        return merge(vec, left, mid, right);
+        merge(vec, left, mid, right);
     }
 }

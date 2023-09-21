@@ -18,10 +18,10 @@ std::vector<Info> parse(std::string fileName) {
     }
 
     while (std::getline(inputFile, line)) {
-        const char *dateTime = line.substr(0, 16).c_str();
+        const std::string dateTime = line.substr(0, 16);
         struct tm timeStruct;
 
-        sscanf(dateTime, "%d/%d/%d %d:%d", &timeStruct.tm_mday, &timeStruct.tm_mon, &timeStruct.tm_year, &timeStruct.tm_hour, &timeStruct.tm_min);
+        sscanf(dateTime.c_str(), "%d/%d/%d %d:%d", &timeStruct.tm_mday, &timeStruct.tm_mon, &timeStruct.tm_year, &timeStruct.tm_hour, &timeStruct.tm_min);
         timeStruct.tm_mon -= 1;
 
         std::time_t time = mktime(&timeStruct);
