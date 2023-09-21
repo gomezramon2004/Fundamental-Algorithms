@@ -1,7 +1,7 @@
 #include "mergeSort.hpp"
 #include <iostream>
 
-bool compareInfoByIndUbi(const Info& info1, const Info& info2) {
+bool compareInfo(const Info& info1, const Info& info2) {
     if (info1.ubi == info2.ubi) {
         return info1.timeValue < info2.timeValue;
     }
@@ -10,12 +10,11 @@ bool compareInfoByIndUbi(const Info& info1, const Info& info2) {
 
 void merge(std::vector<Info>& vec, int left, int mid, int right) {
     int n1 = mid - left + 1, n2 = right - mid, i = 0, j = 0, k = left;
-
     std::vector<Info> leftVec(vec.begin() + left, vec.begin() + left + n1);
     std::vector<Info> rightVec(vec.begin() + mid + 1, vec.begin() + mid + 1 + n2);
 
     while (i < n1 && j < n2) {
-        if (compareInfoByIndUbi(leftVec[i], rightVec[j])) {
+        if (compareInfo(leftVec[i], rightVec[j])) {
             vec[k] = leftVec[i];
             i++;
         } else {
