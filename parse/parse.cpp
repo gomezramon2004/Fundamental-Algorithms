@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <sstream>
 #include <stdexcept>
+#include <iomanip>
 
 std::vector<Info> parse(std::string fileName) {
     std::ifstream inputFile(fileName);  // RAII is responsible for destruct the file-handling object out of scope. It will handle file closing automatically
