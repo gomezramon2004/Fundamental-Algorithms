@@ -14,16 +14,16 @@ std::vector<Info> parse(std::string fileName) {
         throw std::runtime_error("Error - Unable to open the file.");
     }
     
-    const size_t lineCount = std::count_if(std::istreambuf_iterator<char>(inputFile), std::istreambuf_iterator<char>(), [](char c) { return c == '\n'; });
-    inputFile.seekg(0);
-    std::vector<Info> parsedVec(lineCount);
+    const size_t LINE_COUNT = std::count_if(std::istreambuf_iterator<char>(inputFile), std::istreambuf_iterator<char>(), [](char c) { return c == '\n'; }); // Count the number of '\n' from the input stream (number of lines)
+    inputFile.seekg(0); // Sets the position from the input stream to the start
+    std::vector<Info> parsedVec(LINE_COUNT); // Initialize the size of the vector
 
-    for (size_t i = 0; i < lineCount; ++i) {
+    for (size_t i = 0; i < LINE_COUNT; ++i) {
         std::string line;
         std::getline(inputFile, line);
-        const std::string dateTime = line.substr(0, 16);
+        std::string dateTime = line.substr(0, 16); // Substract the datetime characters
         struct tm timeStruct;
-        std::time_t time = mktime(&timeStruct);
+        std::time_t time = mktime(&timeStruct); 
 
         std::istringstream ss(dateTime);
         ss >> std::get_time(&timeStruct, "%d/%m/%Y %H:%M");

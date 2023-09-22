@@ -2,4 +2,5 @@
 #include <vector>
 #include "../parse/parse.hpp"
 
-void print(std::vector<Info> vec);
+// Print the output vector
+void print(const std::vector<Info>& vec);
