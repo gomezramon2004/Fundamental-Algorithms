@@ -27,7 +27,6 @@ std::vector<Info> parse(std::string fileName) {
 
         std::istringstream ss(dateTime);
         ss >> std::get_time(&timeStruct, "%d/%m/%Y %H:%M");
-        timeStruct.tm_mon -= 1;
         
         parsedVec[i] = {time, timeStruct, line[17], line.substr(19, 24)};
     }
