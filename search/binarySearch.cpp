@@ -4,7 +4,7 @@
 
 void searchByLeft(const std::string& input, const std::vector<Info>& vec, const int mid, std::vector<Info>& output) {
     int i = mid - 1;
-    while (vec[i].ubi.substr(0,3) == input) {
+    while (i >= 0 && vec[i].ubi.substr(0,3) == input) {
         output.push_back(vec[i]);
         --i;
     }
@@ -13,7 +13,7 @@ void searchByLeft(const std::string& input, const std::vector<Info>& vec, const 
 
 void searchByRight(const std::string& input, const std::vector<Info>& vec, const int mid, std::vector<Info>& output) {
     int j = mid + 1;
-    while (vec[j].ubi.substr(0,3) == input) {
+    while (j < vec.size() && vec[j].ubi.substr(0,3) == input) {
         output.push_back(vec[j]);
         ++j;
     }
@@ -28,9 +28,9 @@ std::vector<Info> binarySearch(const std::string& input, const std::vector<Info>
         const std::string& key = vec[mid].ubi.substr(0, 3);
 
         if (key == input) {
-            void searchByLeft(const std::string& input, const std::vector<Info>& vec, const int& mid, std::vector<Info>& output);
+            searchByLeft(input, vec, mid, output);
             output.push_back(vec[mid]);
-            void searchByRight(const int& mid, const std::vector<Info>& vec, const std::string& key, std::vector<Info>& output);
+            searchByRight(input, vec, mid, output);
             return output;
         }
 
