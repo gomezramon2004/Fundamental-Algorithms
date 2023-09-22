@@ -2,13 +2,15 @@ CXX = g++
 CXXFLAGS = -Wall -std=c++17
 TARGET = main
 PRSDIR = parse
-SRCDIR = search
 SRTDIR = sort
+SRCDIR = search
+PRNDIR = print
 
 SRCS = main.cpp \
         $(PRSDIR)/parse.cpp \
-        $(SRCDIR)/sequentialSearch.cpp \
-        $(SRTDIR)/mergeSort.cpp
+		$(PRNDIR)/print.cpp \
+        $(SRTDIR)/mergeSort.cpp \
+		$(SRCDIR)/binarySearch.cpp \
 
 EXECUTABLE = a.out
 
